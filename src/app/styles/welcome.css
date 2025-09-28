@@ -1,0 +1,157 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #111111;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 25px;
+  text-align: center;
+}
+
+.greeting {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #222222;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px;
+  color: #f9f9f9;
+  font-size: 2.5rem;
+  font-weight: 700;
+  user-select: none;
+}
+
+.user-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #111111;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #555555;
+  margin-bottom: 20px;
+}
+
+.welcome-message {
+  background-color: #f0f0f0;
+  color: #333333;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  user-select: none;
+}
+
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+  user-select: none;
+}
+
+.btn-primary {
+  background-color: #222222;
+  color: #f9f9f9;
+  border-color: #222222;
+}
+
+.btn-primary:hover {
+  background-color: #444444;
+  border-color: #444444;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #222222;
+  border-color: #222222;
+}
+
+.btn-outline:hover {
+  background-color: #e0e0e0;
+  color: #111111;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stat-item {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  flex: 1;
+  padding: 15px 0;
+  user-select: none;
+}
+
+.stat-number {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #222222;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #444444;
+}
+
+/* Responsive */
+@media (max-width: 420px) {
+  .card {
+    padding: 25px 20px;
+  }
+  .btn-group {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
+  .stats {
+    flex-direction: column;
+  }
+  .stat-item {
+    margin-bottom: 10px;
+  }
+}
