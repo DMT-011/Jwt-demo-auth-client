@@ -43,7 +43,7 @@ export default function CreateUserModal({
       userName,
       email,
       password,
-      roles: [role],
+      type: role,
     };
     
     const token = localStorage.getItem("access_token");
@@ -134,8 +134,8 @@ export default function CreateUserModal({
                 <SelectValue placeholder="Chọn role" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Admin">Admin</SelectItem>
-                <SelectItem value="User">User</SelectItem>
+                <SelectItem value="1">Admin</SelectItem>
+                <SelectItem value="2">User</SelectItem>
               </SelectContent>
             </Select>
           </div>
