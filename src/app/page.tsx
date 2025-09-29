@@ -67,7 +67,6 @@ export default function UserProfile() {
           className="btn btn-primary"
           type="button"
           onClick={handleLogout}
-          aria-label="Bắt đầu sử dụng"
         >
           Đăng xuất
         </button>
