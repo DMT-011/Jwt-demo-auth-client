@@ -1,5 +1,4 @@
 "use client";
-import "@/app/styles/register.css";
 import { notify } from "@/lib/notify";
 import Link from "next/link";
 import { use, useState } from "react";

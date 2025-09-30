@@ -79,7 +79,7 @@ export default function UserListPage() {
           <ul className="space-y-2">
             <li>
               <Link
-                href="/(admin)/dashboard"
+                href="/users"
                 className="block px-3 py-2 rounded hover:bg-gray-200"
               >
                 Dashboard
@@ -87,7 +87,7 @@ export default function UserListPage() {
             </li>
             <li>
               <Link
-                href="/(admin)/users"
+                href="/users"
                 className="block px-3 py-2 rounded bg-gray-200 font-semibold"
               >
                 Users
@@ -117,10 +117,10 @@ export default function UserListPage() {
         {/* Page content */}
         <main className="flex-1 p-8">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-xl font-bold">Danh sách User</h1>
+            <h1 className="text-xl font-bold">List User</h1>
             <Button onClick={() => setCurrentModal("create")}>
               <Plus className="w-4 h-4" />
-              Thêm User
+             <span className="pr-2">Add</span>
             </Button>
           </div>
 

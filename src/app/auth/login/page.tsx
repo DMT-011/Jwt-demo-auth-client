@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { notify } from "@/lib/notify";
-import "@/app/styles/login.css";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -52,6 +51,7 @@ export default function LoginPage() {
     }
   };
 
+
   // Thay YOUR_GOOGLE_CLIENT_ID bằng client id thật của bạn
   const GOOGLE_CLIENT_ID =
     "321364169741-9hlfh6s9joc24jd5nl5ulvlp1r1m857i.apps.googleusercontent.com";
@@ -87,7 +87,6 @@ export default function LoginPage() {
           className="login-form"
           id="loginForm"
           onSubmit={handleLogin}
-          noValidate
         >
           <div className="form-group">
             <div className="input-wrapper">
