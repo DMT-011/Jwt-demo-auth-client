@@ -1,14 +1,13 @@
 "use client";
 import Link from "next/link";
-import "@/app/styles/login.css";
 import { use, useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { notify } from "@/lib/notify";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [isAdminChecked, setIsAdminChecked] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -32,12 +31,18 @@ export default function LoginPage() {
       }
 
       const data = await res.json();
+      const userRole = data.roles[0];
+
       // Save token in localStorage
       localStorage.setItem("access_token", data.jwtToken);
       localStorage.setItem("refresh_token", data.refreshToken);
 
       // Redirect home welcome page if use login success
-      router.push("/");
+      if (isAdminChecked && userRole === "Admin") {
+        router.push("/users");
+      } else {
+        router.push("/");
+      }
 
       // Show notice when user login successfully
       notify.success("Login successfully");
@@ -106,6 +111,29 @@ export default function LoginPage() {
               <div className="ripple-container"></div>
             </div>
             <span className="error-message" id="passwordError"></span>
+          </div>
+
+          <div className="form-options">
+            <div className="checkbox-wrapper">
+              <input
+                type="checkbox"
+                id="isAdmin"
+                checked={isAdminChecked}
+                onChange={(e) => setIsAdminChecked(e.target.checked)}
+              />
+              <label htmlFor="isAdmin" className="checkbox-label">
+                <div className="checkbox-material">
+                  <div className="checkbox-ripple"></div>
+                  <svg className="checkbox-icon" viewBox="0 0 24 24">
+                    <path
+                      className="checkbox-path"
+                      d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                    />
+                  </svg>
+                </div>
+                Login as an administrator
+              </label>
+            </div>
           </div>
 
           <button type="submit" className="login-btn material-btn">

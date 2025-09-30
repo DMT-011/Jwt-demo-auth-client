@@ -1,4 +1,5 @@
 "use client";
+
 import "@/app/styles/welcome.css";
 import { notify } from "@/lib/notify";
 import { useRouter } from "next/navigation";
