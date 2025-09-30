@@ -7,6 +7,8 @@ import { Plus } from "lucide-react";
 import CreateUserModal from "@/components/users/CreateUserModal";
 import UpdateUserModal from "@/components/users/UpdateUserModal";
 import ConfirmDeleteModal from "@/components/users/ConfirmDeleteModal";
+import { notify } from "@/lib/notify";
+
 
 type User = {
   id: number;
@@ -63,12 +65,12 @@ export default function UserListPage() {
   };
 
   return (
-    <div className="pr-30 pl-30 mt-24">
+    <div className="pr-44 pl-44 mt-24">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold">Danh sách User</h1>
+        <h1 className="text-xl font-bold">User management</h1>
         <Button onClick={() => setCurrentModal("create")}>
           <Plus className="w-4 h-4" />
-          Thêm User
+          <span className="pr-2">Add</span>
         </Button>
       </div>
 

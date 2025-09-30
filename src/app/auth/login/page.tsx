@@ -3,7 +3,7 @@ import Link from "next/link";
 import "@/app/styles/login.css";
 import { use, useState } from "react";
 import { useRouter } from "next/navigation";
-
+import { notify } from "@/lib/notify";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -27,23 +27,22 @@ export default function LoginPage() {
       });
 
       if (!res.ok) {
-        setMessage("Login failed");
+        notify.error("Login failed!");
         return;
       }
 
       const data = await res.json();
-
       // Save token in localStorage
       localStorage.setItem("access_token", data.jwtToken);
       localStorage.setItem("refresh_token", data.refreshToken);
 
       // Redirect home welcome page if use login success
-      router.push('/')
-      
-      setMessage(`Welcome ${data.userName} (${data.email})`);
+      router.push("/");
+
+      // Show notice when user login successfully
+      notify.success("Login successfully");
     } catch (error) {
       console.error(error);
-      setMessage("Error occurred");
     }
   };
 
@@ -180,8 +179,6 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-
-      <p>{message}</p>
     </div>
   );
 }

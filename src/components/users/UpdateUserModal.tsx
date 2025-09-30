@@ -17,6 +17,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { notify } from "@/lib/notify";
 
 interface UpdateUserModalProps {
   isOpen: boolean;
@@ -79,8 +80,9 @@ export default function UpdateUserModal({
       const updatedUser = { ...user, ...body };
       onUpdate(updatedUser);
       onClose();
+      notify.success("Update info user success")
     } else {
-      alert("Cập nhật thất bại!");
+      notify.error("Update failed!")
     }
   };
 
@@ -88,7 +90,7 @@ export default function UpdateUserModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Cập nhật User</DialogTitle>
+          <DialogTitle>Update info user</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
@@ -97,7 +99,7 @@ export default function UpdateUserModal({
             <Input
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Nhập first name"
+              placeholder="Enter first name"
             />
           </div>
 
@@ -106,7 +108,7 @@ export default function UpdateUserModal({
             <Input
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              placeholder="Nhập last name"
+              placeholder="Enter last name"
             />
           </div>
 
@@ -116,7 +118,7 @@ export default function UpdateUserModal({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Nhập email"
+              placeholder="Enter email"
             />
           </div>
 
@@ -146,9 +148,9 @@ export default function UpdateUserModal({
 
         <DialogFooter className="pt-4">
           <Button variant="outline" onClick={onClose}>
-            Hủy
+            Cancel
           </Button>
-          <Button onClick={handleSave}>Lưu</Button>
+          <Button onClick={handleSave}>Save</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

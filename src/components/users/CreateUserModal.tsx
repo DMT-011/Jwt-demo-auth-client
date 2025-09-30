@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { notify } from "@/lib/notify";
 import {
   Dialog,
   DialogContent,
@@ -45,7 +46,7 @@ export default function CreateUserModal({
       password,
       type: role,
     };
-    
+
     const token = localStorage.getItem("access_token");
     const res = await fetch("http://localhost:5254/api/User/create", {
       method: "POST",
@@ -60,6 +61,7 @@ export default function CreateUserModal({
       const created = await res.json();
       onCreate(created);
       onClose();
+      
       // reset form
       setFirstName("");
       setLastName("");
@@ -67,8 +69,10 @@ export default function CreateUserModal({
       setEmail("");
       setPassword("");
       setRole("");
+      
+      notify.success("Create user success")
     } else {
-      alert("Tạo user thất bại!");
+      notify.error("Create user failed!")
     }
   };
 
@@ -76,7 +80,7 @@ export default function CreateUserModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>Thêm User mới</DialogTitle>
+          <DialogTitle>Create user</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
@@ -85,7 +89,7 @@ export default function CreateUserModal({
             <Input
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              placeholder="Nhập first name"
+              placeholder="Enter first name"
             />
           </div>
 
@@ -94,7 +98,7 @@ export default function CreateUserModal({
             <Input
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              placeholder="Nhập last name"
+              placeholder="Enter last name"
             />
           </div>
 
@@ -103,7 +107,7 @@ export default function CreateUserModal({
             <Input
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              placeholder="Nhập user name"
+              placeholder="Enter user name"
             />
           </div>
 
@@ -113,7 +117,7 @@ export default function CreateUserModal({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Nhập email"
+              placeholder="Enter email"
             />
           </div>
 
@@ -123,7 +127,7 @@ export default function CreateUserModal({
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Nhập password"
+              placeholder="Enter password"
             />
           </div>
 
@@ -131,7 +135,7 @@ export default function CreateUserModal({
             <label className="block text-sm font-medium mb-1">Role</label>
             <Select value={role} onValueChange={setRole}>
               <SelectTrigger>
-                <SelectValue placeholder="Chọn role" />
+                <SelectValue placeholder="Select role" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="1">Admin</SelectItem>
@@ -143,9 +147,9 @@ export default function CreateUserModal({
 
         <DialogFooter className="pt-4">
           <Button variant="outline" onClick={onClose}>
-            Hủy
+            Cancel
           </Button>
-          <Button onClick={handleSave}>Tạo mới</Button>
+          <Button onClick={handleSave}>Create</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
