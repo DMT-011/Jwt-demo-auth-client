@@ -9,13 +9,13 @@ export default function UserProfile() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  // Handle logout 
+  // Handle logout
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
 
-    router.push('/auth/login');
-  }
+    router.push("/auth/login");
+  };
 
   // Handle get data profile user
   useEffect(() => {
@@ -31,17 +31,30 @@ export default function UserProfile() {
         Authorization: `${token}`,
       },
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error("Lỗi xác thực hoặc không lấy được dữ liệu user");
+        }
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          return res.json();
+        }
+        return null;
+      })
       .then((data) => setProfile(data))
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        console.error(err);
+        router.push("/auth/login");
+      })
       .finally(() => setLoading(false));
   }, []);
 
   if (loading) return <p>Đang tải...</p>;
-  if (!profile || !profile.firstName) return <p>Đang chuyển về trang đăng nhập...</p>;
+  if (!profile || !profile.firstName)
+    return <p>Đang chuyển về trang đăng nhập...</p>;
 
   return (
-    <div className="card" role="main" >
+    <div className="card" role="main">
       <div className="greeting" id="greeting">
         Chào buổi sáng!
       </div>

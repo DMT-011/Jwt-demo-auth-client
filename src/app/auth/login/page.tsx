@@ -4,7 +4,6 @@ import "@/app/styles/login.css";
 import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 
-
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -38,13 +37,29 @@ export default function LoginPage() {
       localStorage.setItem("refresh_token", data.refreshToken);
 
       // Redirect home welcome page if use login success
-      router.push('/')
-      
+      router.push("/");
+
       setMessage(`Welcome ${data.userName} (${data.email})`);
     } catch (error) {
       console.error(error);
       setMessage("Error occurred");
     }
+  };
+
+  // Thay YOUR_GOOGLE_CLIENT_ID bằng client id thật của bạn
+  const GOOGLE_CLIENT_ID =
+    "321364169741-9hlfh6s9joc24jd5nl5ulvlp1r1m857i.apps.googleusercontent.com";
+  const GOOGLE_REDIRECT_URI = "http://localhost:3000/auth/callback/google";
+
+  const handleGoogleLogin = () => {
+    const params = new URLSearchParams({
+      client_id: GOOGLE_CLIENT_ID,
+      redirect_uri: GOOGLE_REDIRECT_URI,
+      response_type: "code",
+      scope: "openid email profile",
+      prompt: "select_account",
+    });
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   };
 
   return (
@@ -133,7 +148,11 @@ export default function LoginPage() {
         </div>
 
         <div className="social-login">
-          <button type="button" className="social-btn google-material">
+          <button
+            type="button"
+            className="social-btn google-material"
+            onClick={handleGoogleLogin}
+          >
             <div className="social-ripple"></div>
             <div className="social-icon google-icon">
               <svg viewBox="0 0 24 24">

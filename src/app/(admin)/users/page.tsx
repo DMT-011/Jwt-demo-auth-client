@@ -28,6 +28,7 @@ export default function UserListPage() {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
+    if (!token) return;
 
     fetch("http://localhost:5254/api/User/get-all", {
       headers: {
