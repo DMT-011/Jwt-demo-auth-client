@@ -2,6 +2,7 @@
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { notify } from "@/lib/notify";
 
 interface ConfirmDeleteModalProps {
   isOpen: boolean;
@@ -31,8 +32,10 @@ export default function ConfirmDeleteModal({
     if (res.ok) {
       onDelete(userId);
       onClose();
+
+      notify.success("Deleted user success");
     } else {
-      alert("Xoá thất bại!");
+      notify.error("Delete user failed!");
     }
   };
 
@@ -40,17 +43,17 @@ export default function ConfirmDeleteModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Xác nhận xoá user</DialogTitle>
+          <DialogTitle>Confirm delete user</DialogTitle>
         </DialogHeader>
 
-        <p>Bạn có chắc muốn xoá user này không?</p>
+        <p>Are you sure you want to delete this user?</p>
 
         <DialogFooter className="pt-4">
           <Button variant="outline" onClick={onClose}>
-            Huỷ
+            Cancel
           </Button>
           <Button variant="destructive" onClick={handleDelete}>
-            Xác nhận
+            Confirm
           </Button>
         </DialogFooter>
       </DialogContent>

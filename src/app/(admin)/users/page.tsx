@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import UserTable from "@/components/users/UserTable";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Divide, Plus } from "lucide-react";
 import CreateUserModal from "@/components/users/CreateUserModal";
 import UpdateUserModal from "@/components/users/UpdateUserModal";
 import ConfirmDeleteModal from "@/components/users/ConfirmDeleteModal";

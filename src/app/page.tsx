@@ -1,5 +1,7 @@
 "use client";
+
 import "@/app/styles/welcome.css";
+import { notify } from "@/lib/notify";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useState } from "react";
@@ -11,10 +13,13 @@ export default function UserProfile() {
 
   // Handle logout
   const handleLogout = () => {
+    // Remote token jwt in localstorage
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
 
+    // Redirect to login page and show notice
     router.push("/auth/login");
+    notify.info("Logged out");
   };
 
   // Handle get data profile user
@@ -43,20 +48,20 @@ export default function UserProfile() {
       })
       .then((data) => setProfile(data))
       .catch((err) => {
-        console.error(err);
-        router.push("/auth/login");
+        // Show notice if user not login
+        notify.info("Login required!");
       })
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Đang tải...</p>;
+  if (loading) return <p>Loading...</p>;
   if (!profile || !profile.firstName)
-    return <p>Đang chuyển về trang đăng nhập...</p>;
+    return <p>Redirecting to the login page...</p>;
 
   return (
     <div className="card" role="main">
       <div className="greeting" id="greeting">
-        Chào buổi sáng!
+        
       </div>
       <div className="avatar" aria-hidden="true" id="avatar"></div>
       <div className="user-name" id="userName">
@@ -66,22 +71,15 @@ export default function UserProfile() {
         {profile.email}
       </div>
       <div className="welcome-message">
-        Chào mừng bạn đã quay trở lại! Chúng tôi rất vui được gặp lại bạn.
+        Welcome back! We are very happy to see you again.
       </div>
       <div className="btn-group">
-        <button
-          className="btn btn-outline"
-          type="button"
-          aria-label="Xem hồ sơ"
-        >
-          Hồ sơ
-        </button>
         <button
           className="btn btn-primary"
           type="button"
           onClick={handleLogout}
         >
-          Đăng xuất
+          Log out
         </button>
       </div>
 

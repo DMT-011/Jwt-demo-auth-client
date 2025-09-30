@@ -24,11 +24,11 @@ export default function UserTable({ users, onEdit, onDelete }: Props) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Họ Tên</TableHead>
-          <TableHead>UserName</TableHead>
+          <TableHead>FullName</TableHead>
+          <TableHead>Username</TableHead>
           <TableHead>Email</TableHead>
           <TableHead>Roles</TableHead>
-          <TableHead className="text-right">Hành động</TableHead>
+          <TableHead className="text-right">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
