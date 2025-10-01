@@ -70,13 +70,6 @@ export default function UserProfile() {
       </div>
       <div className="btn-group">
         <button
-          className="btn btn-outline"
-          type="button"
-          aria-label="Xem hồ sơ"
-        >
-          Hồ sơ
-        </button>
-        <button
           className="btn btn-primary"
           type="button"
           onClick={handleLogout}
