@@ -1,5 +1,5 @@
 "use client";
-import "@/app/styles/register.css";
+import { notify } from "@/lib/notify";
 import Link from "next/link";
 import { use, useState } from "react";
 
@@ -9,7 +9,6 @@ export default function RegisterPage() {
   const [lastName, setlastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,13 +29,21 @@ export default function RegisterPage() {
       });
 
       if (!res.ok) {
-        throw new Error("Đăng ký thất bại!");
+        notify.error("Registration failed!");
       }
 
       const data = await res.json();
-      setMessage("Đăng ký thành công: " + JSON.stringify(data));
+
+      // Show notice register success and reset form
+      notify.success("Registration successfully");
+      setfirstName("");
+      setlastName("");
+      setEmail("");
+      setUsername("");
+      setPassword("");
+
     } catch (err: any) {
-      setMessage(err.message);
+      console.log(err);
     }
   };
 
@@ -119,8 +126,6 @@ export default function RegisterPage() {
       <div className="signin-link">
         Already have an account? <Link href={"/auth/login"}>Sign in</Link>
       </div>
-
-      {message && <p className="mt-4">{message}</p>}
     </div>
   );
 }

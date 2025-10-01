@@ -1,10 +1,5 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
+.body-login {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: #fafafa;
     min-height: 100vh;
@@ -461,6 +456,10 @@ body {
     opacity: 0;
 }
 
+input[type="password"]::-ms-reveal {
+    display: none;
+  }
+
 .material-btn.loading .btn-loader {
     opacity: 1;
 }
@@ -468,7 +467,7 @@ body {
 /* Divider */
 .divider {
     text-align: center;
-    margin: 24px 0;
+    margin: 18px 0 !important;
     position: relative;
 }
 
