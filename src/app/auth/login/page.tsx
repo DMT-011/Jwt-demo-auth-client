@@ -31,7 +31,10 @@ export default function LoginPage() {
       }
 
       const data = await res.json();
-      const userRole = data.roles[0];
+      const userRole =
+        Array.isArray(data.roles) && data.roles.length > 0
+          ? data.roles[0]
+          : null;
 
       // Save token in localStorage
       localStorage.setItem("access_token", data.jwtToken);
@@ -50,7 +53,6 @@ export default function LoginPage() {
       console.error(error);
     }
   };
-
 
   // Thay YOUR_GOOGLE_CLIENT_ID bằng client id thật của bạn
   const GOOGLE_CLIENT_ID =
@@ -83,11 +85,7 @@ export default function LoginPage() {
           <p>to continue to your account</p>
         </div>
 
-        <form
-          className="login-form"
-          id="loginForm"
-          onSubmit={handleLogin}
-        >
+        <form className="login-form" id="loginForm" onSubmit={handleLogin}>
           <div className="form-group">
             <div className="input-wrapper">
               <input
